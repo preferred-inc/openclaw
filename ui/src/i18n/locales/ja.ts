@@ -408,6 +408,139 @@ export const ja: TranslationMap = {
         "SSOが無効です。設定で gateway.auth.sso.enabled を true にするとSAMLベースのシングルサインオンが有効になります。",
     },
   },
+  onboarding: {
+    buttons: {
+      next: "次へ",
+      prev: "戻る",
+      done: "完了",
+      progress: "{{current}} / {{total}}",
+      startTour: "使い方ガイド",
+      restartTours: "ガイドをもう一度見る",
+    },
+    overview: {
+      welcome: {
+        title: "TSUKASA AI へようこそ",
+        description:
+          "これは TSUKASA AI の管理画面です。ここからサーバーの接続状態の確認や各種設定ができます。",
+      },
+      access: {
+        title: "サーバー接続",
+        description:
+          "まずはここでサーバーの接続先URLやアクセスキーを設定して「接続」を押してください。",
+      },
+      status: {
+        title: "接続状態の確認",
+        description:
+          "バージョンや接続状態がここに表示されます。緑の点が表示されていれば正常に接続されています。",
+      },
+      nav: {
+        title: "メニュー",
+        description:
+          "左のメニューから各機能にアクセスできます。チャット、連携アプリ、アシスタントの設定などがあります。",
+      },
+      theme: {
+        title: "テーマ切り替え",
+        description: "画面の明るさを変更できます。「自動」はOSの設定に合わせます。",
+      },
+    },
+    channels: {
+      intro: {
+        title: "連携アプリの設定",
+        description: "LINE、Slack、Teamsなどのアプリと接続する設定を行います。",
+      },
+      setup: {
+        title: "アプリを追加する",
+        description:
+          "各アプリのAPIキーやトークンを設定すると、そのアプリ経由でAIとやり取りできるようになります。",
+      },
+    },
+    instances: {
+      intro: {
+        title: "接続中の端末",
+        description:
+          "現在サーバーに接続している端末（PC、スマートフォンなど）の一覧が表示されます。",
+      },
+    },
+    sessions: {
+      intro: {
+        title: "会話の管理",
+        description: "進行中の会話の一覧です。会話ごとの設定変更やリセットができます。",
+      },
+    },
+    usage: {
+      intro: {
+        title: "利用状況",
+        description: "AIの利用量と費用を確認できます。期間やモデルごとの内訳も表示されます。",
+      },
+    },
+    cron: {
+      intro: {
+        title: "自動実行タスク",
+        description: "決まった時間やスケジュールで自動的にタスクを実行する機能です。",
+      },
+      create: {
+        title: "タスクの作成",
+        description:
+          "「タスクを追加」から新しい自動実行タスクを作れます。例：毎朝9時にニュースをまとめて通知する。",
+      },
+    },
+    agents: {
+      intro: {
+        title: "アシスタントの管理",
+        description:
+          "AIアシスタントの設定画面です。複数のアシスタントを用途に応じて使い分けられます。",
+      },
+      manage: {
+        title: "アシスタントの設定",
+        description: "名前、使用するAIモデル、使えるツールなどをアシスタントごとに設定できます。",
+      },
+    },
+    skills: {
+      intro: {
+        title: "機能の管理",
+        description: "アシスタントが使える機能（Webブラウジング、画像生成など）の一覧です。",
+      },
+      manage: {
+        title: "機能のオン/オフ",
+        description: "各機能のオン/オフを切り替えたり、APIキーを設定できます。",
+      },
+    },
+    nodes: {
+      intro: {
+        title: "デバイスの管理",
+        description: "登録済みのデバイスとそのコマンドの管理ができます。",
+      },
+    },
+    config: {
+      intro: {
+        title: "設定",
+        description: "サーバーの詳細設定を変更できます。通常はそのままで問題ありません。",
+      },
+      edit: {
+        title: "設定の編集",
+        description: "フォーム形式で設定を変更できます。変更後は「保存」を押してください。",
+      },
+    },
+    debug: {
+      intro: {
+        title: "診断",
+        description:
+          "サーバーの状態確認や問題の診断ができます。トラブル時にサポートへ共有する情報もここで確認できます。",
+      },
+    },
+    logs: {
+      intro: {
+        title: "ログ",
+        description: "サーバーの動作ログをリアルタイムで確認できます。問題の調査に役立ちます。",
+      },
+    },
+    chat: {
+      intro: {
+        title: "チャット",
+        description: "AIアシスタントと直接会話できます。質問やタスクの依頼をここで行えます。",
+      },
+    },
+  },
   channels: {
     status: {
       configured: "設定済み",

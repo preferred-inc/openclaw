@@ -139,4 +139,14 @@ export const pt_BR: TranslationMap = {
     es: "Español (Espanhol)",
     ja: "日本語 (Japonês)",
   },
+  onboarding: {
+    buttons: {
+      next: "Próximo",
+      prev: "Voltar",
+      done: "Concluído",
+      progress: "{{current}} / {{total}}",
+      startTour: "Tour Guiado",
+      restartTours: "Reiniciar Tours",
+    },
+  },
 };

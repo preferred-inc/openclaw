@@ -140,4 +140,14 @@ export const de: TranslationMap = {
     es: "Spanisch (Español)",
     ja: "日本語 (Japanisch)",
   },
+  onboarding: {
+    buttons: {
+      next: "Weiter",
+      prev: "Zurück",
+      done: "Fertig",
+      progress: "{{current}} / {{total}}",
+      startTour: "Geführte Tour",
+      restartTours: "Touren neu starten",
+    },
+  },
 };
