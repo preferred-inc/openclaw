@@ -482,4 +482,91 @@ export const ja: TranslationMap = {
       },
     },
   },
+  channels: {
+    status: {
+      configured: "設定済み",
+      running: "稼働中",
+      connected: "接続済み",
+      linked: "連携済み",
+      lastStart: "前回の起動",
+      lastProbe: "前回の確認",
+      lastConnect: "前回の接続",
+      lastMessage: "前回のメッセージ",
+      lastInbound: "前回の受信",
+      authAge: "認証経過時間",
+      mode: "モード",
+      baseUrl: "接続先URL",
+      credential: "認証情報",
+      audience: "対象",
+      publicKey: "公開鍵",
+      yes: "はい",
+      no: "いいえ",
+      active: "有効",
+      accounts: "アカウント（{count}件）",
+    },
+    health: {
+      title: "チャネルの状態",
+      subtitle: "サーバーから取得した各チャネルの接続状況です。",
+      noSnapshot: "まだデータがありません。",
+    },
+    generic: {
+      subtitle: "チャネルの状態と設定です。",
+    },
+    whatsapp: {
+      subtitle: "WhatsApp Webとの連携および接続状況の確認。",
+      showQr: "QRコードを表示",
+      relink: "再連携",
+      waitForScan: "スキャン待ち",
+      logout: "ログアウト",
+      working: "処理中\u2026",
+    },
+    telegram: {
+      subtitle: "Botの状態とチャネル設定。",
+    },
+    discord: {
+      subtitle: "Botの状態とチャネル設定。",
+    },
+    slack: {
+      subtitle: "Socketモードの状態とチャネル設定。",
+    },
+    signal: {
+      subtitle: "signal-cliの状態とチャネル設定。",
+    },
+    googlechat: {
+      subtitle: "Chat API Webhookの状態とチャネル設定。",
+    },
+    imessage: {
+      subtitle: "macOSブリッジの状態とチャネル設定。",
+    },
+    nostr: {
+      subtitle: "Nostrリレー経由の分散型DM（NIP-04）。",
+      profile: "プロフィール",
+      editProfile: "プロフィールを編集",
+      noProfile:
+        "プロフィールが未設定です。「プロフィールを編集」から名前やアバターを設定できます。",
+      name: "名前",
+      displayName: "表示名",
+      about: "紹介",
+    },
+    config: {
+      loadingSchema: "設定スキーマを読み込み中\u2026",
+      schemaUnavailable: "スキーマが利用できません。「Raw」から編集してください。",
+      channelSchemaUnavailable: "チャネルの設定スキーマが利用できません。",
+      saving: "保存中\u2026",
+      save: "保存",
+      reload: "再読み込み",
+    },
+    actions: {
+      probe: "接続確認",
+      refresh: "更新",
+      probeOk: "OK",
+      probeFailed: "失敗",
+    },
+    update: {
+      available: "アップデートがあります:",
+      running: "実行中",
+      updating: "アップデート中\u2026",
+      updateNow: "今すぐ更新",
+    },
+  },
 };
