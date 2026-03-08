@@ -1078,7 +1078,10 @@ export function renderApp(state: AppViewState) {
                 auditEvents: state.enterpriseAuditEvents,
                 auditLoading: state.enterpriseAuditLoading,
                 auditFilterAction: state.enterpriseAuditFilterAction,
-                onAuditFilterActionChange: (v) => (state.enterpriseAuditFilterAction = v),
+                onAuditFilterActionChange: (v) => {
+                  state.enterpriseAuditFilterAction = v;
+                  void loadEnterpriseAudit(state);
+                },
                 onAuditRefresh: () => void loadEnterpriseAudit(state),
                 ipRestrictionEnabled: state.enterpriseIpEnabled,
                 ipAllowList: state.enterpriseIpAllowList,
