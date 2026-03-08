@@ -1,6 +1,8 @@
+import { loadConfig } from "../config/config.js";
 import { withPluginRuntimeGatewayRequestScope } from "../plugins/runtime/gateway-request-scope.js";
 import { formatControlPlaneActor, resolveControlPlaneActor } from "./control-plane-audit.js";
 import { consumeControlPlaneWriteBudget } from "./control-plane-rate-limit.js";
+import { recordAuditEvent, checkRbacAuthorization } from "./enterprise-guard.js";
 import { ADMIN_SCOPE, authorizeOperatorScopesForMethod } from "./method-scopes.js";
 import { ErrorCodes, errorShape } from "./protocol/index.js";
 import { isRoleAuthorizedForMethod, parseGatewayRole } from "./role-policy.js";
@@ -35,6 +37,60 @@ import { webHandlers } from "./server-methods/web.js";
 import { wizardHandlers } from "./server-methods/wizard.js";
 
 const CONTROL_PLANE_WRITE_METHODS = new Set(["config.apply", "config.patch", "update.run"]);
+
+/** Methods that should be recorded in the enterprise audit log. */
+const AUDIT_LOG_METHODS = new Set([
+  "config.apply",
+  "config.patch",
+  "channels.probe",
+  "channels.config.save",
+  "sessions.create",
+  "sessions.delete",
+  "sessions.patch",
+  "cron.create",
+  "cron.toggle",
+  "cron.remove",
+  "cron.run",
+  "skills.install",
+  "skills.update",
+  "skills.toggle",
+]);
+
+/** Map gateway method names to audit action identifiers. */
+function resolveAuditAction(method: string): import("./audit-log.js").AuditAction | null {
+  switch (method) {
+    case "config.apply":
+      return "config.apply";
+    case "config.patch":
+      return "config.write";
+    case "channels.probe":
+      return "channel.probe";
+    case "channels.config.save":
+      return "channel.config_save";
+    case "sessions.create":
+      return "session.create";
+    case "sessions.delete":
+      return "session.delete";
+    case "sessions.patch":
+      return "session.patch";
+    case "cron.create":
+      return "cron.create";
+    case "cron.toggle":
+      return "cron.toggle";
+    case "cron.remove":
+      return "cron.remove";
+    case "cron.run":
+      return "cron.run";
+    case "skills.install":
+      return "skill.install";
+    case "skills.update":
+      return "skill.update";
+    case "skills.toggle":
+      return "skill.toggle";
+    default:
+      return null;
+  }
+}
 function authorizeGatewayMethod(method: string, client: GatewayRequestOptions["client"]) {
   if (!client?.connect) {
     return null;
@@ -104,6 +160,23 @@ export async function handleGatewayRequest(
     respond(false, undefined, authError);
     return;
   }
+
+  // Enterprise RBAC check (additive – no-op when RBAC is disabled)
+  const cfgSnapshot = loadConfig();
+  const rbacError = checkRbacAuthorization(req.method, client, cfgSnapshot.gateway?.rbac);
+  if (rbacError) {
+    recordAuditEvent(cfgSnapshot.gateway?.auditLog, {
+      action: "config.read",
+      client,
+      target: req.method,
+      detail: rbacError,
+      ok: false,
+      reason: "rbac_denied",
+    });
+    respond(false, undefined, errorShape(ErrorCodes.INVALID_REQUEST, rbacError));
+    return;
+  }
+
   if (CONTROL_PLANE_WRITE_METHODS.has(req.method)) {
     const budget = consumeControlPlaneWriteBudget({ client });
     if (!budget.allowed) {
@@ -130,6 +203,18 @@ export async function handleGatewayRequest(
       return;
     }
   }
+  // Enterprise audit logging for control plane write methods
+  if (AUDIT_LOG_METHODS.has(req.method)) {
+    const auditAction = resolveAuditAction(req.method);
+    if (auditAction) {
+      recordAuditEvent(cfgSnapshot.gateway?.auditLog, {
+        action: auditAction,
+        client,
+        target: req.method,
+      });
+    }
+  }
+
   const handler = opts.extraHandlers?.[req.method] ?? coreGatewayHandlers[req.method];
   if (!handler) {
     respond(

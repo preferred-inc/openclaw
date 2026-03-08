@@ -346,12 +346,15 @@ export function handleControlUiHttpRequest(
       res.end();
       return true;
     }
+    const brandConfig = config?.gateway?.brand;
     sendJson(res, 200, {
       basePath,
       assistantName: identity.name,
       assistantAvatar: avatarValue ?? identity.avatar,
       assistantAgentId: identity.agentId,
       serverVersion: resolveRuntimeServiceVersion(process.env),
+      brandLogoUrl: brandConfig?.logoUrl,
+      brandTitle: brandConfig?.title,
     } satisfies ControlUiBootstrapConfig);
     return true;
   }

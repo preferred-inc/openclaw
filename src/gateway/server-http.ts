@@ -32,6 +32,7 @@ import {
   handleControlUiHttpRequest,
   type ControlUiRootState,
 } from "./control-ui.js";
+import { handleIpRestriction, checkWsIpRestriction } from "./enterprise-guard.js";
 import { applyHookMappings } from "./hooks-mapping.js";
 import {
   extractHookToken,
@@ -638,6 +639,10 @@ export function createGatewayHttpServer(opts: {
         : null;
       const requestStages: GatewayHttpRequestStage[] = [
         {
+          name: "ip-restriction",
+          run: () => handleIpRestriction(req, res, configSnapshot.gateway?.ipRestriction),
+        },
+        {
           name: "hooks",
           run: () => handleHooksRequest(req, res),
         },
@@ -797,6 +802,13 @@ export function attachGatewayUpgradeHandler(opts: {
   const { httpServer, wss, canvasHost, clients, resolvedAuth, rateLimiter } = opts;
   httpServer.on("upgrade", (req, socket, head) => {
     void (async () => {
+      // Enterprise IP restriction guard for WebSocket upgrades
+      const wsConfigSnapshot = loadConfig();
+      if (checkWsIpRestriction(req, wsConfigSnapshot.gateway?.ipRestriction)) {
+        socket.write("HTTP/1.1 403 Forbidden\r\nConnection: close\r\n\r\n");
+        socket.destroy();
+        return;
+      }
       const scopedCanvas = normalizeCanvasScopedUrl(req.url ?? "/");
       if (scopedCanvas.malformedScopedPath) {
         writeUpgradeAuthFailure(socket, { ok: false, reason: "unauthorized" });
