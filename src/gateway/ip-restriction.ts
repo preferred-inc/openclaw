@@ -140,17 +140,38 @@ function matchesCidrV6(ip: string, cidr: string): boolean {
   return true;
 }
 
+function stripIpv4MappedPrefix(addr: string): string {
+  return addr.startsWith("::ffff:") ? addr.slice(7) : addr;
+}
+
 function matchesCidr(ip: string, cidr: string): boolean {
+  // Normalize IPv4-mapped IPv6 addresses (e.g. ::ffff:192.168.1.1) to plain IPv4
+  const normalizedIp = stripIpv4MappedPrefix(ip);
+  const cidrHost = cidr.split("/")[0] ?? cidr;
+  const normalizedCidrHost = stripIpv4MappedPrefix(cidrHost);
+  const normalizedCidr =
+    normalizedCidrHost === cidrHost
+      ? cidr
+      : `${normalizedCidrHost}${cidr.includes("/") ? cidr.slice(cidr.indexOf("/")) : ""}`;
   // Try IPv4 first
-  if (parseIpv4(ip) && (parseIpv4(cidr.split("/")[0]) || parseIpv4(cidr))) {
-    return matchesCidrV4(ip, cidr.includes("/") ? cidr : `${cidr}/32`);
+  if (
+    parseIpv4(normalizedIp) &&
+    (parseIpv4(normalizedCidr.split("/")[0]) || parseIpv4(normalizedCidr))
+  ) {
+    return matchesCidrV4(
+      normalizedIp,
+      normalizedCidr.includes("/") ? normalizedCidr : `${normalizedCidr}/32`,
+    );
   }
   // Try IPv6
-  if (ip.includes(":") || cidr.includes(":")) {
-    return matchesCidrV6(ip, cidr.includes("/") ? cidr : `${cidr}/128`);
+  if (normalizedIp.includes(":") || normalizedCidr.includes(":")) {
+    return matchesCidrV6(
+      normalizedIp,
+      normalizedCidr.includes("/") ? normalizedCidr : `${normalizedCidr}/128`,
+    );
   }
   // Exact string match fallback
-  return ip === cidr;
+  return normalizedIp === normalizedCidr;
 }
 
 // ---------------------------------------------------------------------------
