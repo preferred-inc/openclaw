@@ -166,7 +166,7 @@ export async function handleGatewayRequest(
   const rbacError = checkRbacAuthorization(req.method, client, cfgSnapshot.gateway?.rbac);
   if (rbacError) {
     recordAuditEvent(cfgSnapshot.gateway?.auditLog, {
-      action: "config.read",
+      action: resolveAuditAction(req.method) ?? "config.read",
       client,
       target: req.method,
       detail: rbacError,

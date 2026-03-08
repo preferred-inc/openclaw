@@ -640,7 +640,11 @@ export function createGatewayHttpServer(opts: {
       const requestStages: GatewayHttpRequestStage[] = [
         {
           name: "ip-restriction",
-          run: () => handleIpRestriction(req, res, configSnapshot.gateway?.ipRestriction),
+          run: () =>
+            handleIpRestriction(req, res, configSnapshot.gateway?.ipRestriction, {
+              trustedProxies,
+              allowRealIpFallback,
+            }),
         },
         {
           name: "hooks",
@@ -804,7 +808,14 @@ export function attachGatewayUpgradeHandler(opts: {
     void (async () => {
       // Enterprise IP restriction guard for WebSocket upgrades
       const wsConfigSnapshot = loadConfig();
-      if (checkWsIpRestriction(req, wsConfigSnapshot.gateway?.ipRestriction)) {
+      const wsTrustedProxies = wsConfigSnapshot.gateway?.trustedProxies ?? [];
+      const wsAllowRealIpFallback = wsConfigSnapshot.gateway?.allowRealIpFallback === true;
+      if (
+        checkWsIpRestriction(req, wsConfigSnapshot.gateway?.ipRestriction, {
+          trustedProxies: wsTrustedProxies,
+          allowRealIpFallback: wsAllowRealIpFallback,
+        })
+      ) {
         socket.write("HTTP/1.1 403 Forbidden\r\nConnection: close\r\n\r\n");
         socket.destroy();
         return;

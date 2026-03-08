@@ -29,6 +29,7 @@ import {
   type PermissionScope,
 } from "./auth-rbac.js";
 import { checkIpRestriction, type IpRestrictionConfig } from "./ip-restriction.js";
+import { resolveClientIp } from "./net.js";
 import type { GatewayClient } from "./server-methods/types.js";
 
 // ---------------------------------------------------------------------------
@@ -52,17 +53,32 @@ function resolveIpRestrictionConfig(
 /**
  * Check an HTTP request against IP restriction rules.
  * Returns `true` if the request was blocked (response already sent).
+ *
+ * Uses `resolveClientIp` so that requests arriving through trusted reverse
+ * proxies are checked against the real client IP from `x-forwarded-for`,
+ * matching the behaviour of the rest of the gateway auth pipeline.
  */
 export function handleIpRestriction(
   req: IncomingMessage,
   res: ServerResponse,
   ipRestrictionCfg: GatewayIpRestrictionConfig | undefined,
+  opts?: {
+    trustedProxies?: string[];
+    allowRealIpFallback?: boolean;
+  },
 ): boolean {
   const config = resolveIpRestrictionConfig(ipRestrictionCfg);
   if (!config) {
     return false;
   }
-  const clientIp = req.socket?.remoteAddress ?? "";
+  const clientIp =
+    resolveClientIp({
+      remoteAddr: req.socket?.remoteAddress,
+      forwardedFor: req.headers["x-forwarded-for"] as string | undefined,
+      realIp: req.headers["x-real-ip"] as string | undefined,
+      trustedProxies: opts?.trustedProxies,
+      allowRealIpFallback: opts?.allowRealIpFallback,
+    }) ?? "";
   if (!clientIp) {
     return false;
   }
@@ -86,16 +102,30 @@ export function handleIpRestriction(
 /**
  * Check a WebSocket upgrade request against IP restriction rules.
  * Returns `true` if the connection should be rejected.
+ *
+ * Uses `resolveClientIp` so that connections arriving through trusted
+ * reverse proxies are checked against the real client IP.
  */
 export function checkWsIpRestriction(
   req: IncomingMessage,
   ipRestrictionCfg: GatewayIpRestrictionConfig | undefined,
+  opts?: {
+    trustedProxies?: string[];
+    allowRealIpFallback?: boolean;
+  },
 ): boolean {
   const config = resolveIpRestrictionConfig(ipRestrictionCfg);
   if (!config) {
     return false;
   }
-  const clientIp = req.socket?.remoteAddress ?? "";
+  const clientIp =
+    resolveClientIp({
+      remoteAddr: req.socket?.remoteAddress,
+      forwardedFor: req.headers["x-forwarded-for"] as string | undefined,
+      realIp: req.headers["x-real-ip"] as string | undefined,
+      trustedProxies: opts?.trustedProxies,
+      allowRealIpFallback: opts?.allowRealIpFallback,
+    }) ?? "";
   if (!clientIp) {
     return false;
   }
