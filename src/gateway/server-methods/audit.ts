@@ -20,7 +20,11 @@ export const auditHandlers: GatewayRequestHandlers = {
       typeof params.actor === "string" && params.actor.trim() ? params.actor.trim() : undefined;
 
     let events;
-    if (action) {
+    if (action && actor) {
+      events = auditLog
+        .byAction(action as import("../audit-log.js").AuditAction, limit)
+        .filter((e) => e.actor.actor === actor);
+    } else if (action) {
       events = auditLog.byAction(action as import("../audit-log.js").AuditAction, limit);
     } else if (actor) {
       events = auditLog.byActor(actor, limit);
