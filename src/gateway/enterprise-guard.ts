@@ -80,7 +80,19 @@ export function handleIpRestriction(
       allowRealIpFallback: opts?.allowRealIpFallback,
     }) ?? "";
   if (!clientIp) {
-    return false;
+    // Fail closed: if we can't determine the client IP while IP restriction
+    // is enabled, deny the request rather than silently allowing it.
+    res.statusCode = 403;
+    res.setHeader("Content-Type", "application/json; charset=utf-8");
+    res.end(
+      JSON.stringify({
+        error: {
+          message: "Access denied: unable to determine client IP",
+          type: "ip_restricted",
+        },
+      }),
+    );
+    return true;
   }
   const result = checkIpRestriction(clientIp, config);
   if (result.allowed) {
@@ -127,7 +139,8 @@ export function checkWsIpRestriction(
       allowRealIpFallback: opts?.allowRealIpFallback,
     }) ?? "";
   if (!clientIp) {
-    return false;
+    // Fail closed: block when IP cannot be determined
+    return true;
   }
   const result = checkIpRestriction(clientIp, config);
   return !result.allowed;
