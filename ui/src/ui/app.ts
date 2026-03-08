@@ -379,6 +379,13 @@ export class OpenClawApp extends LitElement {
   @state() logsMaxBytes = 250_000;
   @state() logsAtBottom = true;
 
+  @state() auditLoading = false;
+  @state() auditEvents: import("./views/audit-log.js").AuditEventRow[] = [];
+  @state() auditTotal = 0;
+  @state() auditFilterAction = "";
+  @state() auditFilterActor = "";
+  @state() auditLimit = 100;
+
   client: GatewayBrowserClient | null = null;
   private chatScrollFrame: number | null = null;
   private chatScrollTimeout: number | null = null;

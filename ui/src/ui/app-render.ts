@@ -9,6 +9,7 @@ import { loadAgentFileContent, loadAgentFiles, saveAgentFile } from "./controlle
 import { loadAgentIdentities, loadAgentIdentity } from "./controllers/agent-identity.ts";
 import { loadAgentSkills } from "./controllers/agent-skills.ts";
 import { loadAgents, loadToolsCatalog, saveAgentsConfig } from "./controllers/agents.ts";
+import { loadAuditLog } from "./controllers/audit.ts";
 import { loadChannels } from "./controllers/channels.ts";
 import { loadChatHistory } from "./controllers/chat.ts";
 import {
@@ -77,6 +78,7 @@ import {
   sortLocaleStrings,
 } from "./views/agents-utils.ts";
 import { renderAgents } from "./views/agents.ts";
+import { renderAuditLog } from "./views/audit-log.ts";
 import { renderChannels } from "./views/channels.ts";
 import { renderChat } from "./views/chat.ts";
 import { renderConfig } from "./views/config.ts";
@@ -1125,6 +1127,32 @@ export function renderApp(state: AppViewState) {
                 onRefresh: () => loadLogs(state, { reset: true }),
                 onExport: (lines, label) => state.exportLogs(lines, label),
                 onScroll: (event) => state.handleLogsScroll(event),
+              })
+            : nothing
+        }
+
+        ${
+          state.tab === "audit"
+            ? renderAuditLog({
+                loading: state.auditLoading,
+                events: state.auditEvents,
+                total: state.auditTotal,
+                filterAction: state.auditFilterAction,
+                filterActor: state.auditFilterActor,
+                limit: state.auditLimit,
+                onRefresh: () => loadAuditLog(state),
+                onFilterActionChange: (action) => {
+                  state.auditFilterAction = action;
+                  void loadAuditLog(state);
+                },
+                onFilterActorChange: (actor) => {
+                  state.auditFilterActor = actor;
+                  void loadAuditLog(state);
+                },
+                onLimitChange: (limit) => {
+                  state.auditLimit = limit;
+                  void loadAuditLog(state);
+                },
               })
             : nothing
         }
