@@ -6,4 +6,8 @@ export type ControlUiBootstrapConfig = {
   assistantAvatar: string;
   assistantAgentId: string;
   serverVersion?: string;
+  /** Custom brand logo URL. When set, replaces the default favicon in the sidebar. */
+  brandLogoUrl?: string;
+  /** Custom brand title. When set, replaces the default brand name in the sidebar. */
+  brandTitle?: string;
 };

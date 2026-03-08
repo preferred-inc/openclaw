@@ -251,10 +251,10 @@ export function renderApp(state: AppViewState) {
           </button>
           <div class="brand">
             <div class="brand-logo">
-              <img src=${basePath ? `${basePath}/favicon.svg` : "/favicon.svg"} alt="TSUKASA AI" />
+              <img src=${state.brandLogoUrl ?? (basePath ? `${basePath}/favicon.svg` : "/favicon.svg")} alt=${state.brandTitle ?? "TSUKASA AI"} />
             </div>
             <div class="brand-text">
-              <div class="brand-title">TSUKASA AI</div>
+              <div class="brand-title">${state.brandTitle ?? "TSUKASA AI"}</div>
               <div class="brand-sub">${t("brand.subtitle")}</div>
             </div>
           </div>

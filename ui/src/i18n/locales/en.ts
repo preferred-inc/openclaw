@@ -136,6 +136,7 @@ export const en: TranslationMap = {
     de: "Deutsch (German)",
     es: "Español (Spanish)",
     ja: "日本語 (Japanese)",
+    ko: "한국어 (Korean)",
   },
   cron: {
     summary: {
@@ -346,6 +347,92 @@ export const en: TranslationMap = {
       systemEventTextRequired: "System event text required.",
       agentMessageRequiredShort: "Agent message required.",
       nameRequiredShort: "Name required.",
+    },
+  },
+  channels: {
+    status: {
+      configured: "Configured",
+      running: "Running",
+      connected: "Connected",
+      linked: "Linked",
+      lastStart: "Last start",
+      lastProbe: "Last probe",
+      lastConnect: "Last connect",
+      lastMessage: "Last message",
+      lastInbound: "Last inbound",
+      authAge: "Auth age",
+      mode: "Mode",
+      baseUrl: "Base URL",
+      credential: "Credential",
+      audience: "Audience",
+      publicKey: "Public Key",
+      yes: "Yes",
+      no: "No",
+      active: "Active",
+      accounts: "Accounts ({count})",
+    },
+    health: {
+      title: "Channel health",
+      subtitle: "Channel status snapshots from the gateway.",
+      noSnapshot: "No snapshot yet.",
+    },
+    generic: {
+      subtitle: "Channel status and configuration.",
+    },
+    whatsapp: {
+      subtitle: "Link WhatsApp Web and monitor connection health.",
+      showQr: "Show QR",
+      relink: "Relink",
+      waitForScan: "Wait for scan",
+      logout: "Logout",
+      working: "Working\u2026",
+    },
+    telegram: {
+      subtitle: "Bot status and channel configuration.",
+    },
+    discord: {
+      subtitle: "Bot status and channel configuration.",
+    },
+    slack: {
+      subtitle: "Socket mode status and channel configuration.",
+    },
+    signal: {
+      subtitle: "signal-cli status and channel configuration.",
+    },
+    googlechat: {
+      subtitle: "Chat API webhook status and channel configuration.",
+    },
+    imessage: {
+      subtitle: "macOS bridge status and channel configuration.",
+    },
+    nostr: {
+      subtitle: "Decentralized DMs via Nostr relays (NIP-04).",
+      profile: "Profile",
+      editProfile: "Edit Profile",
+      noProfile: 'No profile set. Click "Edit Profile" to add your name, bio, and avatar.',
+      name: "Name",
+      displayName: "Display Name",
+      about: "About",
+    },
+    config: {
+      loadingSchema: "Loading config schema\u2026",
+      schemaUnavailable: "Schema unavailable. Use Raw.",
+      channelSchemaUnavailable: "Channel config schema unavailable.",
+      saving: "Saving\u2026",
+      save: "Save",
+      reload: "Reload",
+    },
+    actions: {
+      probe: "Probe",
+      refresh: "Refresh",
+      probeOk: "ok",
+      probeFailed: "failed",
+    },
+    update: {
+      available: "Update available:",
+      running: "running",
+      updating: "Updating\u2026",
+      updateNow: "Update now",
     },
   },
 };
