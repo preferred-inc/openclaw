@@ -352,6 +352,53 @@ export type GatewayToolsConfig = {
   allow?: string[];
 };
 
+// ---------------------------------------------------------------------------
+// Enterprise extensions (additive – fork-upstream compatible)
+// ---------------------------------------------------------------------------
+
+export type GatewayIpRestrictionConfig = {
+  /** Enable IP-based access restrictions. Default: false. */
+  enabled?: boolean;
+  /**
+   * Allowed CIDR ranges or individual IPs.
+   * Supports IPv4 and IPv6.
+   * Example: `["192.168.1.0/24", "10.0.0.0/8", "::1"]`
+   */
+  allow?: string[];
+  /** Denied CIDR ranges. When both allow and deny match, deny takes precedence. */
+  deny?: string[];
+  /**
+   * When true, loopback addresses are always allowed regardless of allow/deny.
+   * Default: true.
+   */
+  allowLoopback?: boolean;
+};
+
+export type GatewayAuditLogConfig = {
+  /** Enable structured audit logging. Default: false. */
+  enabled?: boolean;
+  /** Maximum in-memory events to keep. Default: 10000. */
+  maxEvents?: number;
+  /** Optional JSON Lines file path for persistent audit log. */
+  filePath?: string;
+};
+
+export type GatewayRbacConfig = {
+  /** Enable user-level RBAC. Default: false. */
+  enabled?: boolean;
+  /** Default role for users not in assignments. Default: "user". */
+  defaultRole?: "admin" | "user" | "viewer";
+  /** Explicit role assignments by user identifier. */
+  assignments?: Array<{ userId: string; role: "admin" | "user" | "viewer" }>;
+};
+
+export type GatewayBrandConfig = {
+  /** Custom brand logo URL for the Control UI sidebar. */
+  logoUrl?: string;
+  /** Custom brand title for the Control UI sidebar. */
+  title?: string;
+};
+
 export type GatewayConfig = {
   /** Single multiplexed port for Gateway WS + HTTP (default: 18789). */
   port?: number;
@@ -399,4 +446,15 @@ export type GatewayConfig = {
    * Set to 0 to disable. Default: 5.
    */
   channelHealthCheckMinutes?: number;
+
+  // -- Enterprise extensions (additive) --
+
+  /** IP-based access restriction (enterprise). */
+  ipRestriction?: GatewayIpRestrictionConfig;
+  /** Structured audit logging (enterprise). */
+  auditLog?: GatewayAuditLogConfig;
+  /** User-level RBAC beyond operator/node (enterprise). */
+  rbac?: GatewayRbacConfig;
+  /** Brand customization for the Control UI (enterprise). */
+  brand?: GatewayBrandConfig;
 };
