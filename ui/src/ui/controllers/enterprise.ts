@@ -76,12 +76,12 @@ export function loadEnterpriseConfig(state: EnterpriseState, snapshot: unknown):
   const rbac = cfg?.gateway?.rbac;
   state.enterpriseRbacEnabled = rbac?.enabled ?? false;
   state.enterpriseRbacDefaultRole = rbac?.defaultRole ?? "viewer";
-  if (rbac?.assignments) {
-    state.enterpriseRbacAssignments = Object.entries(rbac.assignments).map(([userId, role]) => ({
-      userId,
-      role: role as "admin" | "user" | "viewer",
-    }));
-  }
+  state.enterpriseRbacAssignments = rbac?.assignments
+    ? Object.entries(rbac.assignments).map(([userId, role]) => ({
+        userId,
+        role: role as "admin" | "user" | "viewer",
+      }))
+    : [];
 
   const audit = cfg?.gateway?.auditLog;
   state.enterpriseAuditEnabled = audit?.enabled ?? false;
