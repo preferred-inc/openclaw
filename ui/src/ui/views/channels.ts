@@ -74,7 +74,7 @@ export function renderChannels(props: ChannelsProps) {
           <div class="card-title">${t("channels.health.title")}</div>
           <div class="card-sub">${t("channels.health.subtitle")}</div>
         </div>
-        <div class="muted">${props.lastSuccessAt ? formatRelativeTimestamp(props.lastSuccessAt) : "n/a"}</div>
+        <div class="muted">${props.lastSuccessAt ? formatRelativeTimestamp(props.lastSuccessAt) : t("common.na")}</div>
       </div>
       ${
         props.lastError
@@ -259,29 +259,29 @@ function hasRecentActivity(account: ChannelAccountSnapshot): boolean {
   return Date.now() - account.lastInboundAt < RECENT_ACTIVITY_THRESHOLD_MS;
 }
 
-function deriveRunningStatus(account: ChannelAccountSnapshot): "Yes" | "No" | "Active" {
+function deriveRunningStatus(account: ChannelAccountSnapshot): string {
   if (account.running) {
-    return "Yes";
+    return t("channels.status.yes");
   }
   // If we have recent inbound activity, the channel is effectively running
   if (hasRecentActivity(account)) {
-    return "Active";
+    return t("channels.status.active");
   }
-  return "No";
+  return t("channels.status.no");
 }
 
-function deriveConnectedStatus(account: ChannelAccountSnapshot): "Yes" | "No" | "Active" | "n/a" {
+function deriveConnectedStatus(account: ChannelAccountSnapshot): string {
   if (account.connected === true) {
-    return "Yes";
+    return t("channels.status.yes");
   }
   if (account.connected === false) {
-    return "No";
+    return t("channels.status.no");
   }
   // If connected is null/undefined but we have recent activity, show as active
   if (hasRecentActivity(account)) {
-    return "Active";
+    return t("channels.status.active");
   }
-  return "n/a";
+  return t("common.na");
 }
 
 function renderGenericAccount(account: ChannelAccountSnapshot) {
@@ -309,7 +309,7 @@ function renderGenericAccount(account: ChannelAccountSnapshot) {
         </div>
         <div>
           <span class="label">${t("channels.status.lastInbound")}</span>
-          <span>${account.lastInboundAt ? formatRelativeTimestamp(account.lastInboundAt) : "n/a"}</span>
+          <span>${account.lastInboundAt ? formatRelativeTimestamp(account.lastInboundAt) : t("common.na")}</span>
         </div>
         ${
           account.lastError

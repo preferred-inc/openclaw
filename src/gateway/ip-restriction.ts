@@ -81,11 +81,14 @@ function matchesCidrV4(ip: string, cidr: string): boolean {
 }
 
 function normalizeIpv6(ip: string): string | null {
-  // Strip IPv4-mapped prefix
+  // Convert IPv4-mapped IPv6 to full IPv6 representation
   if (ip.startsWith("::ffff:")) {
     const v4 = ip.slice(7);
-    if (parseIpv4(v4)) {
-      return v4;
+    const v4Bytes = parseIpv4(v4);
+    if (v4Bytes) {
+      const hi = ((v4Bytes[0] << 8) | v4Bytes[1]).toString(16).padStart(4, "0");
+      const lo = ((v4Bytes[2] << 8) | v4Bytes[3]).toString(16).padStart(4, "0");
+      return `0000:0000:0000:0000:0000:ffff:${hi}:${lo}`;
     }
   }
   // Simple normalization – expand :: and pad groups
@@ -120,9 +123,19 @@ function matchesCidrV6(ip: string, cidr: string): boolean {
   // Compare bit by bit via hex groups
   const ipHex = normalizedIp.replace(/:/g, "");
   const cidrHex = normalizedCidr.replace(/:/g, "");
-  const fullBits = Math.floor(prefix / 4);
-  if (ipHex.slice(0, fullBits) !== cidrHex.slice(0, fullBits)) {
+  const fullNibbles = Math.floor(prefix / 4);
+  if (ipHex.slice(0, fullNibbles) !== cidrHex.slice(0, fullNibbles)) {
     return false;
+  }
+  // Check remaining bits within the partial nibble
+  const remainderBits = prefix % 4;
+  if (remainderBits > 0 && fullNibbles < ipHex.length && fullNibbles < cidrHex.length) {
+    const ipNibble = parseInt(ipHex[fullNibbles], 16);
+    const cidrNibble = parseInt(cidrHex[fullNibbles], 16);
+    const mask = (0xf << (4 - remainderBits)) & 0xf;
+    if ((ipNibble & mask) !== (cidrNibble & mask)) {
+      return false;
+    }
   }
   return true;
 }
