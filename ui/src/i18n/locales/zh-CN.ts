@@ -341,4 +341,14 @@ export const zh_CN: TranslationMap = {
       nameRequiredShort: "名称为必填。",
     },
   },
+  onboarding: {
+    buttons: {
+      next: "下一步",
+      prev: "上一步",
+      done: "完成",
+      progress: "{{current}} / {{total}}",
+      startTour: "功能导览",
+      restartTours: "重新查看导览",
+    },
+  },
 };

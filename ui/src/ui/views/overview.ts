@@ -4,6 +4,7 @@ import { t, i18n, SUPPORTED_LOCALES, type Locale } from "../../i18n/index.ts";
 import { buildExternalLinkRel, EXTERNAL_LINK_TARGET } from "../external-link.ts";
 import { formatRelativeTimestamp, formatDurationHuman } from "../format.ts";
 import type { GatewayHelloOk } from "../gateway.ts";
+import { resetAllTours } from "../onboarding.ts";
 import { formatNextRun } from "../presenter.ts";
 import type { UiSettings } from "../storage.ts";
 import { shouldShowPairingHint } from "./overview-hints.ts";
@@ -354,6 +355,15 @@ export function renderOverview(props: OverviewProps) {
         <div>
           <div class="note-title">${t("overview.notes.cronTitle")}</div>
           <div class="muted">${t("overview.notes.cronText")}</div>
+        </div>
+        <div>
+          <button
+            class="btn btn--sm"
+            @click=${() => {
+              resetAllTours();
+              window.location.reload();
+            }}
+          >${t("onboarding.buttons.restartTours")}</button>
         </div>
       </div>
     </section>

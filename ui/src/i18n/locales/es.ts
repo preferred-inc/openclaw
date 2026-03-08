@@ -357,4 +357,14 @@ export const es: TranslationMap = {
       nameRequiredShort: "Nombre requerido.",
     },
   },
+  onboarding: {
+    buttons: {
+      next: "Siguiente",
+      prev: "Anterior",
+      done: "Listo",
+      progress: "{{current}} / {{total}}",
+      startTour: "Tour Guiado",
+      restartTours: "Reiniciar Tours",
+    },
+  },
 };

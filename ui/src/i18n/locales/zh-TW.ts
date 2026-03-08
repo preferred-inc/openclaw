@@ -136,4 +136,14 @@ export const zh_TW: TranslationMap = {
     es: "Español (西班牙語)",
     ja: "日本語 (日語)",
   },
+  onboarding: {
+    buttons: {
+      next: "下一步",
+      prev: "上一步",
+      done: "完成",
+      progress: "{{current}} / {{total}}",
+      startTour: "功能導覽",
+      restartTours: "重新查看導覽",
+    },
+  },
 };

@@ -364,6 +364,9 @@ function applyTabSelection(
   if (options.syncUrl) {
     syncUrlWithTab(host, next, false);
   }
+
+  // Trigger onboarding tour for the new tab (if not yet seen)
+  void import("./onboarding.ts").then(({ maybeStartTour }) => maybeStartTour(next));
 }
 
 export function syncUrlWithTab(host: SettingsHost, tab: Tab, replace: boolean) {
