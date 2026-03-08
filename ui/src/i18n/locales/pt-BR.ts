@@ -14,6 +14,17 @@ export const pt_BR: TranslationMap = {
     docs: "Docs",
     resources: "Recursos",
   },
+  brand: {
+    subtitle: "Painel do Gateway",
+  },
+  theme: {
+    system: "Sistema",
+    systemLabel: "Tema do sistema",
+    light: "Claro",
+    lightLabel: "Tema claro",
+    dark: "Escuro",
+    darkLabel: "Tema escuro",
+  },
   nav: {
     chat: "Chat",
     control: "Controle",
@@ -61,6 +72,7 @@ export const pt_BR: TranslationMap = {
       password: "Senha (não armazenada)",
       sessionKey: "Chave de Sessão Padrão",
       language: "Idioma",
+      passwordPlaceholder: "senha do sistema ou compartilhada",
       connectHint: "Clique em Conectar para aplicar as alterações de conexão.",
       trustedProxy: "Autenticado por proxy confiável.",
     },

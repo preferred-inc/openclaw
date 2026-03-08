@@ -14,6 +14,17 @@ export const zh_CN: TranslationMap = {
     docs: "文档",
     resources: "资源",
   },
+  brand: {
+    subtitle: "网关仪表板",
+  },
+  theme: {
+    system: "系统",
+    systemLabel: "跟随系统",
+    light: "浅色",
+    lightLabel: "浅色主题",
+    dark: "深色",
+    darkLabel: "深色主题",
+  },
   nav: {
     chat: "聊天",
     control: "控制",
@@ -61,6 +72,7 @@ export const zh_CN: TranslationMap = {
       password: "密码 (不存储)",
       sessionKey: "默认会话密钥",
       language: "语言",
+      passwordPlaceholder: "系统或共享密码",
       connectHint: "点击连接以应用连接更改。",
       trustedProxy: "通过受信任代理认证。",
     },

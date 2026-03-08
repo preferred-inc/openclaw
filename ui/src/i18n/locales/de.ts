@@ -14,6 +14,17 @@ export const de: TranslationMap = {
     docs: "Dokumentation",
     resources: "Ressourcen",
   },
+  brand: {
+    subtitle: "Gateway-Dashboard",
+  },
+  theme: {
+    system: "System",
+    systemLabel: "Systemdesign",
+    light: "Hell",
+    lightLabel: "Helles Design",
+    dark: "Dunkel",
+    darkLabel: "Dunkles Design",
+  },
   nav: {
     chat: "Chat",
     control: "Steuerung",
@@ -61,6 +72,7 @@ export const de: TranslationMap = {
       password: "Passwort (nicht gespeichert)", // pragma: allowlist secret
       sessionKey: "Standard-Sitzungsschlüssel",
       language: "Sprache",
+      passwordPlaceholder: "System- oder gemeinsames Passwort",
       connectHint: "Klicken Sie auf Verbinden, um Verbindungsänderungen anzuwenden.",
       trustedProxy: "Authentifiziert über vertrauenswürdigen Proxy.",
     },

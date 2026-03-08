@@ -14,6 +14,17 @@ export const zh_TW: TranslationMap = {
     docs: "文檔",
     resources: "資源",
   },
+  brand: {
+    subtitle: "閘道器儀表板",
+  },
+  theme: {
+    system: "系統",
+    systemLabel: "系統主題",
+    light: "淺色",
+    lightLabel: "淺色主題",
+    dark: "深色",
+    darkLabel: "深色主題",
+  },
   nav: {
     chat: "聊天",
     control: "控制",
@@ -61,6 +72,7 @@ export const zh_TW: TranslationMap = {
       password: "密碼 (不存儲)",
       sessionKey: "默認會話密鑰",
       language: "語言",
+      passwordPlaceholder: "系統或共用密碼",
       connectHint: "點擊連接以應用連接更改。",
       trustedProxy: "通過受信任代理身份驗證。",
     },
