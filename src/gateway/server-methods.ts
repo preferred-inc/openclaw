@@ -59,20 +59,31 @@ const AUDIT_LOG_METHODS = new Set([
 /** Map gateway method names to audit action identifiers. */
 function resolveAuditAction(method: string): import("./audit-log.js").AuditAction | null {
   switch (method) {
+    case "config.get":
+      return "config.read";
     case "config.apply":
       return "config.apply";
     case "config.patch":
       return "config.write";
+    case "channels.list":
+      return "channel.list";
     case "channels.probe":
       return "channel.probe";
     case "channels.config.save":
       return "channel.config_save";
+    case "chat.send":
+    case "chat.stream":
+      return "chat.send";
+    case "sessions.list":
+      return "session.list";
     case "sessions.create":
       return "session.create";
     case "sessions.delete":
       return "session.delete";
     case "sessions.patch":
       return "session.patch";
+    case "cron.list":
+      return "cron.list";
     case "cron.create":
       return "cron.create";
     case "cron.toggle":
@@ -81,12 +92,18 @@ function resolveAuditAction(method: string): import("./audit-log.js").AuditActio
       return "cron.remove";
     case "cron.run":
       return "cron.run";
+    case "skills.list":
+      return "skill.list";
     case "skills.install":
       return "skill.install";
     case "skills.update":
       return "skill.update";
     case "skills.toggle":
       return "skill.toggle";
+    case "nodes.list":
+      return "node.list";
+    case "doctor.run":
+      return "doctor.run";
     default:
       return null;
   }
