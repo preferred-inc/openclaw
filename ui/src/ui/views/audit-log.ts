@@ -143,7 +143,7 @@ export function renderAuditLog(props: AuditLogProps) {
                 class="btn"
                 @click=${() => props.onLimitChange(props.limit + 100)}
               >
-                ${t("actions.loading").replace(/…$/, "")} more
+                ${t("auditLog.loadMore")}
               </button>
             </div>
           `

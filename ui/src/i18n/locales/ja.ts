@@ -692,6 +692,7 @@ export const ja: TranslationMap = {
       status: "ステータス",
       health: "ヘルス",
       lastHeartbeat: "最終ハートビート",
+      securityAuditPrefix: "セキュリティ監査:",
       securityAuditCritical: "重大 {count}件",
       securityAuditWarnings: "警告 {count}件",
       securityAuditOk: "重大な問題はありません",
@@ -790,5 +791,6 @@ export const ja: TranslationMap = {
       failure: "失敗",
     },
     memoryOnly: "監査ログはメモリにのみ保存されます。サーバー再起動時にイベントは失われます。",
+    loadMore: "さらに読み込む",
   },
 };

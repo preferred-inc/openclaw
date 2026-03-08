@@ -717,6 +717,7 @@ export const en: TranslationMap = {
       status: "Status",
       health: "Health",
       lastHeartbeat: "Last heartbeat",
+      securityAuditPrefix: "Security audit:",
       securityAuditCritical: "{count} critical",
       securityAuditWarnings: "{count} warnings",
       securityAuditOk: "No critical issues",
@@ -813,5 +814,6 @@ export const en: TranslationMap = {
       failure: "Failure",
     },
     memoryOnly: "Audit log is stored in memory only. Events are lost on server restart.",
+    loadMore: "Load more",
   },
 };
