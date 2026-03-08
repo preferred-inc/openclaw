@@ -2,7 +2,7 @@
 read_when:
   - ゼロからの初回セットアップ
   - 動作するチャットへの最短ルートを知りたい
-summary: OpenClawをインストールし、数分で最初のチャットを実行しましょう。
+summary: TSUKASA AIをインストールし、数分で最初のチャットを実行しましょう。
 title: はじめに
 x-i18n:
   generated_at: "2026-02-08T17:15:16Z"
@@ -18,7 +18,7 @@ x-i18n:
 目標：ゼロから最小限のセットアップで最初の動作するチャットを実現する。
 
 <Info>
-最速のチャット方法：Control UIを開く（チャンネル設定は不要）。`openclaw dashboard`を実行してブラウザでチャットするか、<Tooltip headline="Gatewayホスト" tip="OpenClaw Gatewayサービスを実行しているマシン。">Gatewayホスト</Tooltip>で`http://127.0.0.1:18789/`を開きます。
+最速のチャット方法：Control UIを開く（チャンネル設定は不要）。`openclaw dashboard`を実行してブラウザでチャットするか、<Tooltip headline="Gatewayホスト" tip="TSUKASA AI Gatewayサービスを実行しているマシン。">Gatewayホスト</Tooltip>で`http://127.0.0.1:18789/`を開きます。
 ドキュメント：[Dashboard](/web/dashboard)と[Control UI](/web/control-ui)。
 </Info>
 
@@ -33,7 +33,7 @@ x-i18n:
 ## クイックセットアップ（CLI）
 
 <Steps>
-  <Step title="OpenClawをインストール（推奨）">
+  <Step title="TSUKASA AIをインストール（推奨）">
     <Tabs>
       <Tab title="macOS/Linux">
         ```bash
@@ -95,7 +95,7 @@ Control UIが読み込まれれば、Gatewayは使用可能な状態です。
     構成済みのチャンネルが必要です。
 
     ```bash
-    openclaw message send --target +15555550123 --message "Hello from OpenClaw"
+    openclaw message send --target +15555550123 --message "Hello from TSUKASA AI"
     ```
 
   </Accordion>
