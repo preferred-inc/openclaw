@@ -283,6 +283,8 @@ export function startTour(tab: Tab, opts?: { force?: boolean }): Driver | null {
   // Destroy any existing tour
   destroyActiveTour();
 
+  let tourStarted = false;
+
   activeDriver = driver({
     showProgress: true,
     animate: true,
@@ -297,13 +299,16 @@ export function startTour(tab: Tab, opts?: { force?: boolean }): Driver | null {
     progressText: t("onboarding.buttons.progress"),
     steps,
     onDestroyed: () => {
-      markTourSeen(tab);
+      if (tourStarted) {
+        markTourSeen(tab);
+      }
       activeDriver = null;
     },
   });
 
   // Small delay to ensure DOM is ready after tab switch
   requestAnimationFrame(() => {
+    tourStarted = true;
     activeDriver?.drive();
   });
 

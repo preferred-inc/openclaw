@@ -34,6 +34,7 @@ import {
   tabFromPath,
   type Tab,
 } from "./navigation.ts";
+import { maybeStartTour } from "./onboarding.ts";
 import { saveSettings, type UiSettings } from "./storage.ts";
 import { startThemeTransition, type ThemeTransitionContext } from "./theme-transition.ts";
 import { resolveTheme, type ResolvedTheme, type ThemeMode } from "./theme.ts";
@@ -366,7 +367,7 @@ function applyTabSelection(
   }
 
   // Trigger onboarding tour for the new tab (if not yet seen)
-  void import("./onboarding.ts").then(({ maybeStartTour }) => maybeStartTour(next));
+  maybeStartTour(next);
 }
 
 export function syncUrlWithTab(host: SettingsHost, tab: Tab, replace: boolean) {
