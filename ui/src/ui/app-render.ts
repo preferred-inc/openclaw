@@ -48,6 +48,7 @@ import {
   revokeDeviceToken,
   rotateDeviceToken,
 } from "./controllers/devices.ts";
+import { loadEnterpriseAudit } from "./controllers/enterprise.ts";
 import {
   loadExecApprovals,
   removeExecApprovalsFormValue,
@@ -82,6 +83,7 @@ import { renderChat } from "./views/chat.ts";
 import { renderConfig } from "./views/config.ts";
 import { renderCron } from "./views/cron.ts";
 import { renderDebug } from "./views/debug.ts";
+import { renderEnterprise } from "./views/enterprise.ts";
 import { renderExecApprovalPrompt } from "./views/exec-approval.ts";
 import { renderGatewayUrlConfirmation } from "./views/gateway-url-confirmation.ts";
 import { renderInstances } from "./views/instances.ts";
@@ -1041,6 +1043,89 @@ export function renderApp(state: AppViewState) {
                 onSplitRatioChange: (ratio: number) => state.handleSplitRatioChange(ratio),
                 assistantName: state.assistantName,
                 assistantAvatar: state.assistantAvatar,
+              })
+            : nothing
+        }
+
+        ${
+          state.tab === "enterprise"
+            ? renderEnterprise({
+                rbacEnabled: state.enterpriseRbacEnabled,
+                rbacDefaultRole: state.enterpriseRbacDefaultRole,
+                rbacAssignments: state.enterpriseRbacAssignments,
+                rbacEditUserId: state.enterpriseRbacEditUserId,
+                rbacEditRole: state.enterpriseRbacEditRole,
+                onRbacEditUserIdChange: (v) => (state.enterpriseRbacEditUserId = v),
+                onRbacEditRoleChange: (v) => (state.enterpriseRbacEditRole = v),
+                onRbacAddAssignment: () => {
+                  const userId = state.enterpriseRbacEditUserId.trim();
+                  if (!userId) {
+                    return;
+                  }
+                  const role = state.enterpriseRbacEditRole as "admin" | "user" | "viewer";
+                  state.enterpriseRbacAssignments = [
+                    ...state.enterpriseRbacAssignments.filter((a) => a.userId !== userId),
+                    { userId, role },
+                  ];
+                  state.enterpriseRbacEditUserId = "";
+                },
+                onRbacRemoveAssignment: (userId) => {
+                  state.enterpriseRbacAssignments = state.enterpriseRbacAssignments.filter(
+                    (a) => a.userId !== userId,
+                  );
+                },
+                auditEnabled: state.enterpriseAuditEnabled,
+                auditEvents: state.enterpriseAuditEvents,
+                auditLoading: state.enterpriseAuditLoading,
+                auditFilterAction: state.enterpriseAuditFilterAction,
+                onAuditFilterActionChange: (v) => {
+                  state.enterpriseAuditFilterAction = v;
+                  void loadEnterpriseAudit(state);
+                },
+                onAuditRefresh: () => void loadEnterpriseAudit(state),
+                ipRestrictionEnabled: state.enterpriseIpEnabled,
+                ipAllowList: state.enterpriseIpAllowList,
+                ipDenyList: state.enterpriseIpDenyList,
+                ipAllowLoopback: state.enterpriseIpAllowLoopback,
+                ipEditValue: state.enterpriseIpEditValue,
+                ipEditMode: state.enterpriseIpEditMode,
+                onIpEditValueChange: (v) => (state.enterpriseIpEditValue = v),
+                onIpEditModeChange: (m) => (state.enterpriseIpEditMode = m),
+                onIpAddRule: () => {
+                  const value = state.enterpriseIpEditValue.trim();
+                  if (!value) {
+                    return;
+                  }
+                  if (state.enterpriseIpEditMode === "allow") {
+                    if (!state.enterpriseIpAllowList.includes(value)) {
+                      state.enterpriseIpAllowList = [...state.enterpriseIpAllowList, value];
+                    }
+                  } else {
+                    if (!state.enterpriseIpDenyList.includes(value)) {
+                      state.enterpriseIpDenyList = [...state.enterpriseIpDenyList, value];
+                    }
+                  }
+                  state.enterpriseIpEditValue = "";
+                },
+                onIpRemoveRule: (mode, value) => {
+                  if (mode === "allow") {
+                    state.enterpriseIpAllowList = state.enterpriseIpAllowList.filter(
+                      (v) => v !== value,
+                    );
+                  } else {
+                    state.enterpriseIpDenyList = state.enterpriseIpDenyList.filter(
+                      (v) => v !== value,
+                    );
+                  }
+                },
+                ssoEnabled: state.enterpriseSsoEnabled,
+                ssoProtocol: state.enterpriseSsoProtocol,
+                ssoSpEntityId: state.enterpriseSsoSpEntityId,
+                ssoCallbackPath: state.enterpriseSsoCallbackPath,
+                ssoEntryPoint: state.enterpriseSsoEntryPoint,
+                ssoIssuer: state.enterpriseSsoIssuer,
+                ssoAllowedDomains: state.enterpriseSsoAllowedDomains,
+                connected: state.connected,
               })
             : nothing
         }

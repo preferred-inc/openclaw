@@ -353,6 +353,30 @@ export class OpenClawApp extends LitElement {
   @state() skillsBusyKey: string | null = null;
   @state() skillMessages: Record<string, SkillMessage> = {};
 
+  // Enterprise admin
+  @state() enterpriseRbacEnabled = false;
+  @state() enterpriseRbacDefaultRole = "viewer";
+  @state() enterpriseRbacAssignments: import("./views/enterprise.js").RbacAssignment[] = [];
+  @state() enterpriseRbacEditUserId = "";
+  @state() enterpriseRbacEditRole = "viewer";
+  @state() enterpriseAuditEnabled = false;
+  @state() enterpriseAuditEvents: import("./views/enterprise.js").AuditEventEntry[] = [];
+  @state() enterpriseAuditLoading = false;
+  @state() enterpriseAuditFilterAction = "";
+  @state() enterpriseIpEnabled = false;
+  @state() enterpriseIpAllowList: string[] = [];
+  @state() enterpriseIpDenyList: string[] = [];
+  @state() enterpriseIpAllowLoopback = true;
+  @state() enterpriseIpEditValue = "";
+  @state() enterpriseIpEditMode: "allow" | "deny" = "allow";
+  @state() enterpriseSsoEnabled = false;
+  @state() enterpriseSsoProtocol = "saml";
+  @state() enterpriseSsoSpEntityId = "";
+  @state() enterpriseSsoCallbackPath = "/__openclaw/auth/sso/callback";
+  @state() enterpriseSsoEntryPoint = "";
+  @state() enterpriseSsoIssuer = "";
+  @state() enterpriseSsoAllowedDomains: string[] = [];
+
   @state() debugLoading = false;
   @state() debugStatus: StatusSummary | null = null;
   @state() debugHealth: HealthSnapshot | null = null;

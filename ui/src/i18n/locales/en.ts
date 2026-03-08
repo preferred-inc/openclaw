@@ -47,6 +47,7 @@ export const en: TranslationMap = {
     config: "Config",
     debug: "Debug",
     logs: "Logs",
+    enterprise: "Enterprise",
   },
   subtitles: {
     agents: "Manage agent workspaces, tools, and identities.",
@@ -62,6 +63,7 @@ export const en: TranslationMap = {
     config: "Edit ~/.openclaw/openclaw.json safely.",
     debug: "Gateway snapshots, events, and manual RPC calls.",
     logs: "Live tail of the gateway file logs.",
+    enterprise: "RBAC, audit logging, IP restriction, and SSO settings.",
   },
   overview: {
     access: {
@@ -347,6 +349,63 @@ export const en: TranslationMap = {
       systemEventTextRequired: "System event text required.",
       agentMessageRequiredShort: "Agent message required.",
       nameRequiredShort: "Name required.",
+    },
+  },
+  enterprise: {
+    rbac: {
+      title: "Role-Based Access Control",
+      subtitle: "Manage user roles and permissions for gateway access.",
+      defaultRole: "Default Role",
+      assignmentCount: "Assignments",
+      assignments: "User Role Assignments",
+      noAssignments: "No role assignments configured.",
+      userId: "User ID",
+      userIdPlaceholder: "e.g. user@example.com",
+      role: "Role",
+      addAssignment: "Add Assignment",
+      remove: "Remove",
+      disabledHint:
+        "RBAC is not enabled. Set gateway.rbac.enabled to true in the config to activate role-based access control.",
+    },
+    audit: {
+      title: "Audit Log",
+      subtitle: "Review structured audit events for compliance and security monitoring.",
+      filterAction: "Filter by action",
+      allActions: "All actions",
+      noEvents: "No audit events recorded.",
+      loading: "Loading\u2026",
+      disabledHint:
+        "Audit logging is not enabled. Set gateway.auditLog.enabled to true in the config to activate audit event recording.",
+    },
+    ip: {
+      title: "IP Restriction",
+      subtitle: "Restrict gateway access to specific IP ranges or addresses.",
+      allowRules: "Allow Rules",
+      denyRules: "Deny Rules",
+      loopback: "Allow Loopback",
+      allowListTitle: "Allow List",
+      denyListTitle: "Deny List",
+      noRules: "No rules configured.",
+      cidrOrIp: "CIDR or IP Address",
+      ruleType: "Rule Type",
+      allow: "Allow",
+      deny: "Deny",
+      addRule: "Add Rule",
+      disabledHint:
+        "IP restriction is not enabled. Set gateway.ipRestriction.enabled to true in the config to activate IP-based access control.",
+    },
+    sso: {
+      title: "Single Sign-On (SSO)",
+      subtitle: "SAML-based SSO configuration for enterprise identity providers.",
+      protocol: "Protocol",
+      spEntityId: "SP Entity ID",
+      callbackPath: "Callback Path",
+      idpConfig: "Identity Provider Configuration",
+      entryPoint: "IdP Entry Point",
+      issuer: "IdP Issuer",
+      allowedDomains: "Allowed Domains",
+      disabledHint:
+        "SSO is not enabled. Set gateway.auth.sso.enabled to true in the config to activate SAML-based single sign-on.",
     },
   },
   onboarding: {
