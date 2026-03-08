@@ -125,5 +125,6 @@ export const pt_BR: TranslationMap = {
     ptBR: "Português (Português Brasileiro)",
     de: "Deutsch (Alemão)",
     es: "Español (Espanhol)",
+    ja: "日本語 (Japonês)",
   },
 };
