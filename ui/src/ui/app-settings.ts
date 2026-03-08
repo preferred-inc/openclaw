@@ -21,6 +21,7 @@ import {
 } from "./controllers/cron.ts";
 import { loadDebug } from "./controllers/debug.ts";
 import { loadDevices } from "./controllers/devices.ts";
+import { loadEnterpriseAudit, loadEnterpriseConfig } from "./controllers/enterprise.ts";
 import { loadExecApprovals } from "./controllers/exec-approvals.ts";
 import { loadLogs } from "./controllers/logs.ts";
 import { loadNodes } from "./controllers/nodes.ts";
@@ -230,6 +231,14 @@ export async function refreshActiveTab(host: SettingsHost) {
   if (host.tab === "debug") {
     await loadDebug(host as unknown as OpenClawApp);
     host.eventLog = host.eventLogBuffer;
+  }
+  if (host.tab === "enterprise") {
+    await loadConfig(host as unknown as OpenClawApp);
+    const app = host as unknown as OpenClawApp;
+    loadEnterpriseConfig(app, app.configSnapshot?.config);
+    if (app.enterpriseAuditEnabled) {
+      await loadEnterpriseAudit(app);
+    }
   }
   if (host.tab === "logs") {
     host.logsAtBottom = true;

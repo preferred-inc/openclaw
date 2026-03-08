@@ -235,6 +235,30 @@ export type AppViewState = {
     skillEdits: Record<string, string>;
     skillMessages: Record<string, SkillMessage>;
     skillsBusyKey: string | null;
+    // Enterprise admin
+    enterpriseRbacEnabled: boolean;
+    enterpriseRbacDefaultRole: string;
+    enterpriseRbacAssignments: import("./views/enterprise.js").RbacAssignment[];
+    enterpriseRbacEditUserId: string;
+    enterpriseRbacEditRole: string;
+    enterpriseAuditEnabled: boolean;
+    enterpriseAuditEvents: import("./views/enterprise.js").AuditEventEntry[];
+    enterpriseAuditLoading: boolean;
+    enterpriseAuditFilterAction: string;
+    enterpriseIpEnabled: boolean;
+    enterpriseIpAllowList: string[];
+    enterpriseIpDenyList: string[];
+    enterpriseIpAllowLoopback: boolean;
+    enterpriseIpEditValue: string;
+    enterpriseIpEditMode: "allow" | "deny";
+    enterpriseSsoEnabled: boolean;
+    enterpriseSsoProtocol: string;
+    enterpriseSsoSpEntityId: string;
+    enterpriseSsoCallbackPath: string;
+    enterpriseSsoEntryPoint: string;
+    enterpriseSsoIssuer: string;
+    enterpriseSsoAllowedDomains: string[];
+
     debugLoading: boolean;
     debugStatus: StatusSummary | null;
     debugHealth: HealthSnapshot | null;
