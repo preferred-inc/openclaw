@@ -320,14 +320,23 @@ export function startTour(tab: Tab, opts?: { force?: boolean }): Driver | null {
   return activeDriver;
 }
 
+/** Track the most recently requested tab for maybeStartTour debouncing. */
+let pendingTourTab: Tab | null = null;
+
 /**
  * Start tour for a tab if not yet seen.
  * Called automatically on tab switch.
  */
 export function maybeStartTour(tab: Tab): void {
   if (!hasSeenTour(tab)) {
+    // Record this tab as the pending target so rapid switches only fire the last one
+    pendingTourTab = tab;
     // Delay slightly to ensure content is rendered
     setTimeout(() => {
+      if (pendingTourTab !== tab) {
+        return; // Tab changed since we scheduled this tour
+      }
+      pendingTourTab = null;
       startTour(tab);
     }, 300);
   }
