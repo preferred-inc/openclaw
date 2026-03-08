@@ -137,6 +137,8 @@ export class OpenClawApp extends LitElement {
   @state() assistantAvatar = bootAssistantIdentity.avatar;
   @state() assistantAgentId = bootAssistantIdentity.agentId ?? null;
   @state() serverVersion: string | null = null;
+  @state() brandLogoUrl: string | null = null;
+  @state() brandTitle: string | null = null;
 
   @state() sessionKey = this.settings.sessionKey;
   @state() chatLoading = false;
