@@ -47,6 +47,7 @@ export const ja: TranslationMap = {
     config: "設定",
     debug: "診断",
     logs: "ログ",
+    enterprise: "エンタープライズ",
   },
   subtitles: {
     agents: "アシスタントの設定や使えるツールを管理します。",
@@ -62,6 +63,7 @@ export const ja: TranslationMap = {
     config: "設定ファイル（~/.openclaw/openclaw.json）を編集します。",
     debug: "サーバーの状態確認と問題の診断ができます。",
     logs: "サーバーのログをリアルタイムで表示します。",
+    enterprise: "RBAC、監査ログ、IP制限、SSOの設定を管理します。",
   },
   overview: {
     access: {
@@ -347,6 +349,63 @@ export const ja: TranslationMap = {
       systemEventTextRequired: "メッセージが必要です。",
       agentMessageRequiredShort: "指示内容が必要です。",
       nameRequiredShort: "名前が必要です。",
+    },
+  },
+  enterprise: {
+    rbac: {
+      title: "ロールベースアクセス制御",
+      subtitle: "ゲートウェイへのアクセス権限とユーザーロールを管理します。",
+      defaultRole: "デフォルトロール",
+      assignmentCount: "割り当て数",
+      assignments: "ユーザーロールの割り当て",
+      noAssignments: "ロールの割り当てが設定されていません。",
+      userId: "ユーザーID",
+      userIdPlaceholder: "例: user@example.com",
+      role: "ロール",
+      addAssignment: "割り当てを追加",
+      remove: "削除",
+      disabledHint:
+        "RBACが無効です。設定で gateway.rbac.enabled を true にするとロールベースのアクセス制御が有効になります。",
+    },
+    audit: {
+      title: "監査ログ",
+      subtitle: "コンプライアンスとセキュリティ監視のための監査イベントを確認します。",
+      filterAction: "アクションで絞り込み",
+      allActions: "すべてのアクション",
+      noEvents: "監査イベントはまだありません。",
+      loading: "読み込み中\u2026",
+      disabledHint:
+        "監査ログが無効です。設定で gateway.auditLog.enabled を true にすると監査イベントの記録が有効になります。",
+    },
+    ip: {
+      title: "IP制限",
+      subtitle: "ゲートウェイへのアクセスを特定のIPアドレスやCIDR範囲に制限します。",
+      allowRules: "許可ルール",
+      denyRules: "拒否ルール",
+      loopback: "ループバック許可",
+      allowListTitle: "許可リスト",
+      denyListTitle: "拒否リスト",
+      noRules: "ルールが設定されていません。",
+      cidrOrIp: "CIDRまたはIPアドレス",
+      ruleType: "ルール種別",
+      allow: "許可",
+      deny: "拒否",
+      addRule: "ルールを追加",
+      disabledHint:
+        "IP制限が無効です。設定で gateway.ipRestriction.enabled を true にするとIPベースのアクセス制御が有効になります。",
+    },
+    sso: {
+      title: "シングルサインオン（SSO）",
+      subtitle: "エンタープライズ向けのSAMLベースSSO設定です。",
+      protocol: "プロトコル",
+      spEntityId: "SPエンティティID",
+      callbackPath: "コールバックパス",
+      idpConfig: "IDプロバイダー設定",
+      entryPoint: "IdPエントリーポイント",
+      issuer: "IdP発行者",
+      allowedDomains: "許可ドメイン",
+      disabledHint:
+        "SSOが無効です。設定で gateway.auth.sso.enabled を true にするとSAMLベースのシングルサインオンが有効になります。",
     },
   },
   channels: {
