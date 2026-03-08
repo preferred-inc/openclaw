@@ -307,9 +307,14 @@ export function startTour(tab: Tab, opts?: { force?: boolean }): Driver | null {
   });
 
   // Small delay to ensure DOM is ready after tab switch
+  const currentDriver = activeDriver;
   requestAnimationFrame(() => {
+    // Guard against race condition if another tour was started before this rAF fires
+    if (activeDriver !== currentDriver) {
+      return;
+    }
     tourStarted = true;
-    activeDriver?.drive();
+    currentDriver.drive();
   });
 
   return activeDriver;
