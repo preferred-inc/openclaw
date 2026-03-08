@@ -349,6 +349,140 @@ export const en: TranslationMap = {
       nameRequiredShort: "Name required.",
     },
   },
+  onboarding: {
+    buttons: {
+      next: "Next",
+      prev: "Back",
+      done: "Done",
+      progress: "{{current}} / {{total}}",
+      startTour: "Guided Tour",
+      restartTours: "Restart Tours",
+    },
+    overview: {
+      welcome: {
+        title: "Welcome to TSUKASA AI",
+        description:
+          "This is the TSUKASA AI dashboard. From here you can check your server connection status and configure settings.",
+      },
+      access: {
+        title: "Server Connection",
+        description: "Start by entering your server URL and access key here, then click Connect.",
+      },
+      status: {
+        title: "Connection Status",
+        description:
+          "Your server version and connection status are shown here. A green dot means you are connected.",
+      },
+      nav: {
+        title: "Navigation Menu",
+        description:
+          "Use the sidebar menu to access different features: Chat, Apps, Assistants, Settings, and more.",
+      },
+      theme: {
+        title: "Theme Toggle",
+        description: "Switch between light and dark mode. Auto follows your OS setting.",
+      },
+    },
+    channels: {
+      intro: {
+        title: "Connected Apps",
+        description: "Configure connections to LINE, Slack, Teams and other messaging apps.",
+      },
+      setup: {
+        title: "Add an App",
+        description:
+          "Enter the API key or token for each app to enable AI conversations through that app.",
+      },
+    },
+    instances: {
+      intro: {
+        title: "Connected Devices",
+        description: "See all devices (PCs, phones, etc.) currently connected to your server.",
+      },
+    },
+    sessions: {
+      intro: {
+        title: "Conversations",
+        description:
+          "View and manage active conversations. You can change settings or reset individual conversations.",
+      },
+    },
+    usage: {
+      intro: {
+        title: "Usage",
+        description: "Monitor AI usage and costs. View breakdowns by time period and model.",
+      },
+    },
+    cron: {
+      intro: {
+        title: "Scheduled Tasks",
+        description: "Automatically run tasks on a schedule at set times or intervals.",
+      },
+      create: {
+        title: "Create a Task",
+        description:
+          "Click 'Add task' to create a new scheduled task. Example: Summarize and send news every morning at 9 AM.",
+      },
+    },
+    agents: {
+      intro: {
+        title: "Assistants",
+        description:
+          "Manage your AI assistants. You can create multiple assistants for different purposes.",
+      },
+      manage: {
+        title: "Assistant Settings",
+        description:
+          "Configure the name, AI model, available tools, and other settings for each assistant.",
+      },
+    },
+    skills: {
+      intro: {
+        title: "Skills",
+        description:
+          "View available skills (web browsing, image generation, etc.) that your assistants can use.",
+      },
+      manage: {
+        title: "Enable/Disable Skills",
+        description: "Toggle skills on or off and configure API keys for each skill.",
+      },
+    },
+    nodes: {
+      intro: {
+        title: "Devices",
+        description: "Manage registered devices and their commands.",
+      },
+    },
+    config: {
+      intro: {
+        title: "Configuration",
+        description: "Edit advanced server settings. The defaults work fine for most users.",
+      },
+      edit: {
+        title: "Edit Settings",
+        description: "Use the form to change settings. Don't forget to click Save when done.",
+      },
+    },
+    debug: {
+      intro: {
+        title: "Diagnostics",
+        description:
+          "Check server status and diagnose issues. Useful information for support can be found here.",
+      },
+    },
+    logs: {
+      intro: {
+        title: "Logs",
+        description: "View server logs in real time. Helpful for investigating issues.",
+      },
+    },
+    chat: {
+      intro: {
+        title: "Chat",
+        description: "Talk directly with your AI assistant. Ask questions or request tasks here.",
+      },
+    },
+  },
   channels: {
     status: {
       configured: "Configured",

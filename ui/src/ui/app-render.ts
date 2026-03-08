@@ -68,6 +68,7 @@ import {
 import { buildExternalLinkRel, EXTERNAL_LINK_TARGET } from "./external-link.ts";
 import { icons } from "./icons.ts";
 import { normalizeBasePath, TAB_GROUPS, subtitleForTab, titleForTab } from "./navigation.ts";
+import { startTour } from "./onboarding.ts";
 import {
   resolveAgentConfig,
   resolveConfiguredCronModelSuggestions,
@@ -340,6 +341,18 @@ export function renderApp(state: AppViewState) {
           <div class="page-meta">
             ${state.lastError ? html`<div class="pill danger">${state.lastError}</div>` : nothing}
             ${isChat ? renderChatControls(state) : nothing}
+            <button
+              class="btn btn--sm btn--icon onboarding-help-btn"
+              @click=${() => startTour(state.tab, { force: true })}
+              title=${t("onboarding.buttons.startTour")}
+              aria-label=${t("onboarding.buttons.startTour")}
+            >
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+                <line x1="12" y1="17" x2="12.01" y2="17"></line>
+              </svg>
+            </button>
           </div>
         </section>
 
