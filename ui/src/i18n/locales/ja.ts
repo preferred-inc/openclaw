@@ -14,6 +14,17 @@ export const ja: TranslationMap = {
     docs: "ドキュメント",
     resources: "リソース",
   },
+  brand: {
+    subtitle: "ゲートウェイダッシュボード",
+  },
+  theme: {
+    system: "システム",
+    systemLabel: "システムテーマ",
+    light: "ライト",
+    lightLabel: "ライトテーマ",
+    dark: "ダーク",
+    darkLabel: "ダークテーマ",
+  },
   nav: {
     chat: "チャット",
     control: "コントロール",
@@ -61,6 +72,7 @@ export const ja: TranslationMap = {
       password: "パスワード (保存されません)", // pragma: allowlist secret
       sessionKey: "デフォルトセッションキー",
       language: "言語",
+      passwordPlaceholder: "システムまたは共有パスワード",
       connectHint: "「接続」をクリックして接続設定を適用します。",
       trustedProxy: "信頼済みプロキシ経由で認証済み。",
     },

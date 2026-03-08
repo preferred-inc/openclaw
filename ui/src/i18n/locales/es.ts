@@ -14,6 +14,17 @@ export const es: TranslationMap = {
     docs: "Docs",
     resources: "Recursos",
   },
+  brand: {
+    subtitle: "Panel del Gateway",
+  },
+  theme: {
+    system: "Sistema",
+    systemLabel: "Tema del sistema",
+    light: "Claro",
+    lightLabel: "Tema claro",
+    dark: "Oscuro",
+    darkLabel: "Tema oscuro",
+  },
   nav: {
     chat: "Chat",
     control: "Control",
@@ -61,6 +72,7 @@ export const es: TranslationMap = {
       password: "Contraseña (no se guarda)", // pragma: allowlist secret
       sessionKey: "Clave de sesión predeterminada",
       language: "Idioma",
+      passwordPlaceholder: "contraseña del sistema o compartida",
       connectHint: "Haz clic en Conectar para aplicar los cambios de conexión.",
       trustedProxy: "Autenticado mediante proxy de confianza.",
     },

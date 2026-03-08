@@ -509,8 +509,8 @@ export function renderThemeToggle(state: AppViewState) {
           class="theme-toggle__button ${state.theme === "system" ? "active" : ""}"
           @click=${applyTheme("system")}
           aria-pressed=${state.theme === "system"}
-          aria-label="System theme"
-          title="System"
+          aria-label="${t("theme.systemLabel")}"
+          title="${t("theme.system")}"
         >
           ${renderMonitorIcon()}
         </button>
@@ -518,8 +518,8 @@ export function renderThemeToggle(state: AppViewState) {
           class="theme-toggle__button ${state.theme === "light" ? "active" : ""}"
           @click=${applyTheme("light")}
           aria-pressed=${state.theme === "light"}
-          aria-label="Light theme"
-          title="Light"
+          aria-label="${t("theme.lightLabel")}"
+          title="${t("theme.light")}"
         >
           ${renderSunIcon()}
         </button>
@@ -527,8 +527,8 @@ export function renderThemeToggle(state: AppViewState) {
           class="theme-toggle__button ${state.theme === "dark" ? "active" : ""}"
           @click=${applyTheme("dark")}
           aria-pressed=${state.theme === "dark"}
-          aria-label="Dark theme"
-          title="Dark"
+          aria-label="${t("theme.darkLabel")}"
+          title="${t("theme.dark")}"
         >
           ${renderMoonIcon()}
         </button>
