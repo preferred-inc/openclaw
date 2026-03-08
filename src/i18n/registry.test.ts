@@ -48,7 +48,7 @@ describe("ui i18n locale registry", () => {
     expect(getNestedTranslation(zhCN, "common", "health")).toBe("\u5065\u5eb7\u72b6\u51b5");
 
     const ja = await loadLazyLocaleTranslation("ja");
-    expect(getNestedTranslation(ja, "common", "health")).toBe("\u63a5\u7d9a\u72b6\u614b");
+    expect(getNestedTranslation(ja, "common", "health")).toBe("\u901a\u4fe1\u72b6\u614b");
 
     expect(await loadLazyLocaleTranslation("en")).toBeNull();
   });
