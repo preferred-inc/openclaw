@@ -157,7 +157,7 @@ function matchesCidr(ip: string, cidr: string): boolean {
 // Public API
 // ---------------------------------------------------------------------------
 
-const LOOPBACK_ADDRESSES = new Set(["127.0.0.1", "::1", "0:0:0:0:0:0:0:1"]);
+const LOOPBACK_ADDRESSES = new Set(["127.0.0.1", "::1", "0:0:0:0:0:0:0:1", "::ffff:127.0.0.1"]);
 
 export function isLoopbackIp(ip: string): boolean {
   return LOOPBACK_ADDRESSES.has(ip);
