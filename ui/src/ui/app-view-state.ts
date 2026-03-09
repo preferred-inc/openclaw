@@ -281,6 +281,12 @@ export type AppViewState = {
     logsLimit: number;
     logsMaxBytes: number;
     logsAtBottom: boolean;
+    auditLoading: boolean;
+    auditEvents: import("./views/audit-log.js").AuditEventRow[];
+    auditTotal: number;
+    auditFilterAction: string;
+    auditFilterActor: string;
+    auditLimit: number;
     updateAvailable: import("./types.js").UpdateAvailable | null;
     client: GatewayBrowserClient | null;
     refreshSessionsAfterChat: Set<string>;

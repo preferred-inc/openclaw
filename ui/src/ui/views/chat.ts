@@ -1,6 +1,7 @@
 import { html, nothing } from "lit";
 import { ref } from "lit/directives/ref.js";
 import { repeat } from "lit/directives/repeat.js";
+import { t } from "../../i18n/index.ts";
 import {
   renderMessageGroup,
   renderReadingIndicatorGroup,
@@ -253,9 +254,9 @@ export function renderChat(props: ChatProps) {
   const hasAttachments = (props.attachments?.length ?? 0) > 0;
   const composePlaceholder = props.connected
     ? hasAttachments
-      ? "Add a message or paste more images..."
-      : "Message (↩ to send, Shift+↩ for line breaks, paste images)"
-    : "Connect to the gateway to start chatting…";
+      ? t("chat.placeholder")
+      : t("chat.messagePlaceholder")
+    : t("chat.connectPlaceholder");
 
   const splitRatio = props.splitRatio ?? 0.6;
   const sidebarOpen = Boolean(props.sidebarOpen && props.onCloseSidebar);
@@ -269,7 +270,7 @@ export function renderChat(props: ChatProps) {
       ${
         props.loading
           ? html`
-              <div class="muted">Loading chat…</div>
+              <div class="muted">${t("actions.loading")}</div>
             `
           : nothing
       }
@@ -464,14 +465,14 @@ export function renderChat(props: ChatProps) {
               ?disabled=${!props.connected || (!canAbort && props.sending)}
               @click=${canAbort ? props.onAbort : props.onNewSession}
             >
-              ${canAbort ? "Stop" : "New session"}
+              ${canAbort ? t("actions.stop") : t("actions.newSession")}
             </button>
             <button
               class="btn primary"
               ?disabled=${!props.connected}
               @click=${props.onSend}
             >
-              ${isBusy ? "Queue" : "Send"}<kbd class="btn-kbd">↵</kbd>
+              ${isBusy ? t("actions.queue") : t("actions.send")}<kbd class="btn-kbd">↵</kbd>
             </button>
           </div>
         </div>

@@ -10,6 +10,7 @@ import type { OpenClawApp } from "./app.ts";
 import { loadAgentIdentities, loadAgentIdentity } from "./controllers/agent-identity.ts";
 import { loadAgentSkills } from "./controllers/agent-skills.ts";
 import { loadAgents, loadToolsCatalog } from "./controllers/agents.ts";
+import { loadAuditLog } from "./controllers/audit.ts";
 import { loadChannels } from "./controllers/channels.ts";
 import { loadConfig, loadConfigSchema } from "./controllers/config.ts";
 import {
@@ -243,6 +244,9 @@ export async function refreshActiveTab(host: SettingsHost) {
     host.logsAtBottom = true;
     await loadLogs(host as unknown as OpenClawApp, { reset: true });
     scheduleLogsScroll(host as unknown as Parameters<typeof scheduleLogsScroll>[0], true);
+  }
+  if (host.tab === "audit") {
+    await loadAuditLog(host as unknown as OpenClawApp);
   }
 }
 
